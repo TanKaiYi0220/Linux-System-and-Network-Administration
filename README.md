@@ -1,3 +1,23 @@
+# Convert Markdown to Scripts
+Get the corresponding script.sh from `markdown` file. It will extract terminal commands except the title which is **TESTING**.
+```
+python main.py -file hw01.md
+```
+# Homework Description
+- [HW01](hw01.md)
+- [HW02]()
+- [HW03]()
+- [HW04]()
+
+# Reset Environment
+- HW01
+```
+ip -all netns delete
+ip link delete br0 # br0 which is bridge
+# stores default_iptables_backup.conf before this project launched
+iptables-restore < default_iptables_backup.conf 
+```
+
 # References
 * [計算機網路 - Network Namespace](https://hackmd.io/@0xff07/network/https%3A%2F%2Fhackmd.io%2F%400xff07%2FSJzOwViYF#Linux-Bridges-IP-Tables-and-CNI-Plug-Ins---A-Container-Networking-Deepdive)
 * [深入理解 iptables 和 netfilter 架构](https://arthurchiao.art/blog/deep-dive-into-iptables-and-netfilter-arch-zh/#42-nat-table%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2)
