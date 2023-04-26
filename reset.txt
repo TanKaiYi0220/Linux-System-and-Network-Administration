@@ -1,0 +1,13 @@
+ip -all netns delete
+ip link delete <bridge-name>
+ovs-vsctl del-br <bridge-name>
+iptables -t <table> -D <chain> <rule num>
+iptables -t <table> -L --line-numbers -n
+iptables -L -v
+
+iptables-save | tee default_iptables_backup.conf | grep -v '\-A' | iptables-restore
+iptables-restore < default_iptables_backup.conf
+
+ip -all netns delete
+ip link delete br0
+iptables-restore < default_iptables_backup.conf
