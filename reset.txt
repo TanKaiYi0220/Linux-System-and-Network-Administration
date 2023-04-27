@@ -8,6 +8,9 @@ iptables -L -v
 iptables-save | tee default_iptables_backup.conf | grep -v '\-A' | iptables-restore
 iptables-restore < default_iptables_backup.conf
 
+cp /etc/dhcp/dhcpd.conf /etc/dhcp/default_dhcpd.conf
+mv /etc/dhcp/default_dhcpd.conf /etc/dhcp/dhcpd.conf
+
 ip -all netns delete
 ip link delete br0
 iptables-restore < default_iptables_backup.conf

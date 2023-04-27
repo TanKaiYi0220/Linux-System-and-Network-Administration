@@ -14,8 +14,10 @@ python main.py -file hw01.md
 ```
 ip -all netns delete
 ip link delete br0 # br0 which is bridge
-# stores default_iptables_backup.conf before this project launched
+# stores default iptables_backup.conf before this project launched
 iptables-restore < default_iptables_backup.conf 
+# stores default dhcpd.conf before this project launched
+cp /etc/dhcp/default_dhcpd.conf /etc/dhcp/dhcpd.conf
 ```
 
 # References
@@ -25,6 +27,7 @@ iptables-restore < default_iptables_backup.conf
 * [第十二章、網路參數控管者： DHCP 伺服器](https://linux.vbird.org/linux_server/centos6/0340dhcp.php)
 * [DHCP tricks with Linux network namespace](http://blog.asiantuntijakaveri.fi/2015/07/dhcp-tricks-with-linux-network-namespace.html)
 * [Building containers by hand using namespaces: The net namespace](https://www.redhat.com/sysadmin/net-namespaces)
+* [Setting up a Basic DHCP Client and Server in Linux](https://medium.com/swlh/setting-up-a-basic-dhcp-client-and-server-in-linux-9005457df607)
 
 # YouTube Link
 * [Network Namespaces Basics Explained in 15 Minutes](https://youtu.be/j_UUnlVC2Ss)
