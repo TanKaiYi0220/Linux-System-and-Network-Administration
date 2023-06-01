@@ -1,0 +1,61 @@
+version: '3'
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - /data/db_data:/var/lib/mysql
+    restart:  always
+    environment:
+      MYSQL_ROOT_PASSWORD:  12345678
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    
+  wordpress1:
+    depends_on:
+      - db
+    image:  wordpress:latest
+    volumes:
+      - /src/html:/var/www/html
+      - /logB:/var/log/apache2
+    ports:
+      - "32768:80"
+    expose:
+      - 80
+    restart:  always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+  
+  wordpress2:
+    depends_on:
+      - db
+    image:  wordpress:latest
+    volumes:
+      - /src/html:/var/www/html
+      - /logC:/var/log/apache2
+    ports:
+      - "32769:80"
+    expose:
+      - 80
+    restart:  always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+
+  haproxy:
+    depends_on:
+      - wordpress1
+      - wordpress2
+    image: haproxy
+    volumes:
+      - ./haproxy:/usr/local/etc/haproxy
+    links:
+      - wordpress1
+      - wordpress2
+    ports:
+      - "8080:80"
+    expose:
+      - 80
