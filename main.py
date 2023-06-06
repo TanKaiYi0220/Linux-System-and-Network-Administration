@@ -2,7 +2,7 @@ import re
 import os
 
 # Open the input file and read its contents
-with open('hw04.md', 'r') as f:
+with open('hw03.md', 'r') as f:
     input_text = f.read()
 
 # Find all code blocks
